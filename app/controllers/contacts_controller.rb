@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  
+
   def index
     @contacts = Contact.all
   end
@@ -21,6 +21,12 @@ class ContactsController < ApplicationController
     end
   end
   
+  def destroy
+    @contact = Contact.find(params[:id])
+    @contact.destroy
+    redirect_to contacts_path, notice:"ブログを削除しました！"
+  end
+  
   def show
     @contact = Contact.find(params[:id])
   end
@@ -38,10 +44,6 @@ class ContactsController < ApplicationController
     end
   end
   
-  def destroy
-    @contact = Contact.find(params[:id])
-    redirect_to contacts_path, notice:"ブログを削除しました！"
-  end
   
   def confirm
     @contact = Contact.new(contact_params)
